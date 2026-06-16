@@ -4,7 +4,8 @@ from crud import (get_users,
                   create_user, 
                   get_user_by_id,
                   delete_user,
-                  update_user_email)
+                  update_user_email,
+                  get_user_by_name)
 
 app = FastAPI()
 
@@ -20,7 +21,9 @@ def home():
     return {"message": "FastAPI is working"}
 
 @app.get("/users")
-def read_users():
+def read_users(name:str | None = None ):
+    if name:
+        return get_user_by_name(name)
     return get_users()
 
 @app.post("/users")
@@ -45,6 +48,8 @@ def read_user(user_id: int):
             detail= "User not found"
         )
     return found_user
+
+
 
 @app.put("/users/{user_id}")
 def update_user(
