@@ -80,7 +80,7 @@ Request Body:
 ### Update User Email
 
 ```http
-PUT /user/{user_id}
+PUT /users/{user_id}
 ```
 
 Request Body:
