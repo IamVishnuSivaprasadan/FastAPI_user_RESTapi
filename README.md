@@ -11,6 +11,7 @@ This project demonstrates backend development fundamentals including API design,
 * Create a user
 * Retrieve all users
 * Retrieve a user by ID
+* Search users by name
 * Update user email
 * Delete a user
 * PostgreSQL database integration
