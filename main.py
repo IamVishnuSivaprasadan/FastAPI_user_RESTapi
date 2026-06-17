@@ -26,6 +26,16 @@ def read_users(name:str | None = None ):
         return get_user_by_name(name)
     return get_users()
 
+@app.get("/users/{user_id}")
+def read_user(user_id: int):
+    found_user = get_user_by_id(user_id)
+    if not found_user:
+        raise HTTPException(
+            status_code= 404,
+            detail= "User not found"
+        )
+    return found_user
+
 @app.post("/users")
 def add_user(user: UserCreate):
     created = create_user(
@@ -39,23 +49,11 @@ def add_user(user: UserCreate):
         )
     return {"message" : " User Created"}
 
-@app.get("/users/{user_id}")
-def read_user(user_id: int):
-    found_user = get_user_by_id(user_id)
-    if not found_user:
-        raise HTTPException(
-            status_code= 404,
-            detail= "User not found"
-        )
-    return found_user
-
-
-
 @app.put("/users/{user_id}")
 def update_user(
     user_id: int,
     user: EmailUpdate
-):
+    ):
     updated = update_user_email(
         user_id,
         user.email
